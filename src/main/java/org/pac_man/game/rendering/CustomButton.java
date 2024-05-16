@@ -40,12 +40,11 @@ public class CustomButton extends JComponent {
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
+        this.setBounds(x, y - size, getPreferredSize().width, getPreferredSize().height);
+        this.setSize(getPreferredSize());
     }
 
     public void render(Graphics graphics) {
-        this.setBounds(x, y - size, getPreferredSize().width, getPreferredSize().height);
-        this.setSize(getPreferredSize());
-
         Graphics2D graphics2d = (Graphics2D)graphics;
         graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         graphics2d.setFont(new Font(buttonFont, style, size));

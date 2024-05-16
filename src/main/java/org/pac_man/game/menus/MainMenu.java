@@ -3,11 +3,9 @@ package org.pac_man.game.menus;
 import org.pac_man.game.PacMan;
 import org.pac_man.game.rendering.Screen;
 import org.pac_man.game.rendering.CustomButton;
+import org.pac_man.game.levels.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +21,7 @@ public class MainMenu extends Menu {
         startButton.addButtonClickListener(button -> {
             button.setText("Clicked");
             System.out.println("Clicked");
+            PacMan.level = new Level("C:\\Users\\vadym\\IdeaProjects\\Pac-Man\\src\\main\\resources\\1mobs.png");
         });
         buttons.add(startButton);
         buttons.add(new CustomButton("Options", 200, 260, 10,  1, Color.BLACK.getRGB()));

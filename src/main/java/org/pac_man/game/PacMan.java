@@ -10,6 +10,8 @@ import org.pac_man.game.rendering.Screen;
 import org.pac_man.game.menus.Menu;
 import org.pac_man.game.menus.MainMenu;
 
+import org.pac_man.game.levels.*;
+
 public class PacMan extends JPanel {
     public final static int WIDTH = 300;
     public final static int HEIGHT = WIDTH / 16 * 10;
@@ -21,6 +23,8 @@ public class PacMan extends JPanel {
 
     public Screen screen;
     public static Menu menu;
+
+    public static Level level;
 
     public PacMan(int expectedFps) {
         Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -57,5 +61,9 @@ public class PacMan extends JPanel {
         super.paintComponent(graphics);
         screen.graphics(graphics);
         menu.render(screen);
+
+        if (level != null) {
+            level.render(screen);
+        }
     }
 }
