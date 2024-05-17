@@ -18,4 +18,6 @@ public abstract class Menu {
     public abstract void update();
 
     public abstract void render(Screen screen);
+
+    public abstract void dispose();
 }

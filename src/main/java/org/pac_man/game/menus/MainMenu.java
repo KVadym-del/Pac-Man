@@ -18,14 +18,15 @@ public class MainMenu extends Menu {
         buttons = new ArrayList<>();
 
         CustomButton startButton = new CustomButton("Start", 200, 200, 50, Font.PLAIN, Color.BLACK.getRGB());
-        startButton.addButtonClickListener(button -> {
-            button.setText("Clicked");
-            System.out.println("Clicked");
-            PacMan.level = new Level("C:\\Users\\vadym\\IdeaProjects\\Pac-Man\\src\\main\\resources\\1mobs.png");
-        });
+        startButton.addButtonClickListener(this::startButtonClicked);
+        CustomButton optionsButton = new CustomButton("Options", 200, 260, 50,  1, Color.BLACK.getRGB());
+        optionsButton.addButtonClickListener(this::optionsButtonClicked);
+        CustomButton exitButton = new CustomButton("Exit", 200, 320, 50,  Font.PLAIN, Color.BLACK.getRGB());
+        exitButton.addButtonClickListener(this::exitButtonClicked);
+
         buttons.add(startButton);
-        buttons.add(new CustomButton("Options", 200, 260, 10,  1, Color.BLACK.getRGB()));
-        buttons.add(new CustomButton("Exit", 200, 320, 50,  Font.PLAIN, Color.BLACK.getRGB()));
+        buttons.add(optionsButton);
+        buttons.add(exitButton);
 
         for (CustomButton button : buttons) {
             game.add(button);
@@ -42,5 +43,26 @@ public class MainMenu extends Menu {
         for (CustomButton button : buttons) {
             button.render(screen.graphics);
         }
+    }
+
+    @Override
+    public void dispose() {
+        for (CustomButton button : buttons) {
+            game.remove(button);
+        }
+    }
+
+    public void startButtonClicked(CustomButton button) {
+        System.out.println("Start clicked");
+        PacMan.level = new Level("C:\\Users\\vadym\\IdeaProjects\\Pac-Man\\src\\main\\resources\\1walls.png", PacMan.SCALE);
+    }
+
+    public void optionsButtonClicked(CustomButton button) {
+        System.out.println("Options clicked");
+    }
+
+    public void exitButtonClicked(CustomButton button) {
+        System.out.println("Exit clicked");
+        System.exit(0);
     }
 }

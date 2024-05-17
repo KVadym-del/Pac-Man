@@ -21,7 +21,7 @@ public class SpriteSheet {
 
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++) {
-                    sprites.add(new Sprite(sheet.getSubimage(x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight)));
+                    sprites.add(new Sprite(sheet.getSubimage(x * spriteWidth + 1, y * spriteHeight + 1, spriteWidth - 1, spriteHeight - 1)));
                 }
             }
         } catch (IOException e) {

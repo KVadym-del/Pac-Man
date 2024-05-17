@@ -11,29 +11,32 @@ public class Level {
     public int width, height;
     public List<Tile> tiles;
 
+    public static int SCALE;
+
     public static boolean play = false;
 
-    public Level(String path) {
+    public Level(String path, int scale) {
+        SCALE = scale;
         loadLevelFromFile(path);
     }
 
     public void loadLevelFromFile(String path)
     {
-        SpriteSheet sheet = new SpriteSheet(path, 16 + 1, 16 + 1);
-        width = sheet.getSheetWidth();
-        height = sheet.getSheetHeight();
+        SpriteSheet wallSheet = new SpriteSheet(path, 8 + 1, 8 + 1);
+        width = wallSheet.getSheetWidth();
+        height = wallSheet.getSheetHeight();
         System.out.println("width: " + width + " height: " + height);
-        tiles = new java.util.ArrayList<Tile>();
+        tiles = new java.util.ArrayList<>();
 
-        int x = 1;
-        int y = 1;
-        for (Sprite sprite : sheet.getSprites()) {
-            tiles.add(new Tile(sprite, x, y, false));
+        int x = 0;
+        int y = 0;
+        for (Sprite sprite : wallSheet.getSprites()) {
+            tiles.add(new Tile(Sprite.imageScale(sprite.image, SCALE), x, y, false));
             System.out.println("x: " + x + " y: " + y);
-            x = x + (16 + 1);
-            if (x >= width) {
+            x = x + ((8 + 1) * SCALE);
+            if (x >= width * SCALE) {
                 x = 0;
-                y = y + (16 + 1);
+                y = y + ((8 + 1) * SCALE);
             }
         }
     }

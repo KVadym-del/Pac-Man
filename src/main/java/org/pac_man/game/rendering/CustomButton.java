@@ -17,6 +17,8 @@ public class CustomButton extends JComponent {
 
     private ButtonClickListener listener;
 
+    private boolean isMouseOver = false;
+
     public CustomButton(String text, int x, int y, int size, int style, int color) {
         this.text = text;
         this.x = x;
@@ -24,7 +26,11 @@ public class CustomButton extends JComponent {
         this.size = size;
         this.style = style;
         this.color = color;
+
         this.setLayout(null);
+        this.setBounds(x, y - size, getPreferredSize().width, getPreferredSize().height);
+        this.setSize(getPreferredSize());
+
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -33,6 +39,19 @@ public class CustomButton extends JComponent {
                         listener.buttonClicked(CustomButton.this);
                     }
                 }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                isMouseOver = true;
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                isMouseOver = false;
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
         });
     }
@@ -48,7 +67,11 @@ public class CustomButton extends JComponent {
         Graphics2D graphics2d = (Graphics2D)graphics;
         graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         graphics2d.setFont(new Font(buttonFont, style, size));
-        graphics2d.setColor(new Color(color));
+        if (isMouseOver)
+            graphics2d.setColor(new Color(Color.GRAY.getRGB()));
+        else
+            graphics2d.setColor(new Color(color));
+
         graphics2d.drawString(text, x, y);
     }
 
